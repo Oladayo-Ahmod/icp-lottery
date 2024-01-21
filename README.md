@@ -6,61 +6,41 @@ This is a simple lottery application running on the Internet Computer (ICP). It 
 
 #### Function Signature
 
+This function allows users to create lottery draw and it returns draw ID.
+Example :
+```rust
+dfx canister call icp_rust_boilerplate_backend create_lottery_draw
+```
+
 This function allows users can purchase a lottery ticket.
 
-```rust
-#[ic_cdk::update]
-fn buy_lottery_ticket(owner: String, numbers: Vec<u32>) -> Result<LotteryTicket, LotteryError>
-```
 Example : 
 ```rust
-dfx canister call icp_rust_boilerplate_backend buy_lottery_ticket '("Ahmod", vec { 1; 2; 3; 4; 5; 6 })'
+dfx canister call icp_rust_boilerplate_backend buy_lottery_ticket '(vec {1; 6;5;8;8;9}, 0)'
 ```
 This function allows users to check the details of a purchased lottery ticket by providing its ID.
 If the ticket with the specified ID is found, its details are returned. Otherwise, a NotFound error is returned.
 
-```rust
-#[ic_cdk::query]
-fn check_lottery_ticket(id: u64) -> Result<LotteryTicket, LotteryError>
-```
 Example :
 ```rust
 dfx canister call icp_rust_boilerplate_backend check_lottery_ticket '(0)'
 ```
 
-This function conducts a lottery draw by providing the winning numbers.
-```rust
-#[ic_cdk::update]
-fn conduct_lottery_draw(winning_numbers: Vec<u32>) -> Result<LotteryDraw, LotteryError>
-```
+This function conducts a lottery draw by providing the ID of the draw.
+
 Example : 
 ```rust
-dfx canister call icp_rust_boilerplate_backend  conduct_lottery_draw '(vec { 17; 18;19; 10; 13; 12 })'
+dfx canister call icp_rust_boilerplate_backend conduct_lottery_draw '(0)'
 ```
 
-This function allows a user to participate in a specific lottery draw by providing the IDs of their purchased ticket and the target draw.
-```rust
-#[ic_cdk::update]
-fn participate_in_lottery_draw(ticket_id: u64, draw_id: u64) -> Result<LotteryDraw, LotteryError>
-```
+This function retrieves a list of all the lottery tickets.
+
 Example : 
 ```rust
-dfx canister call icp_rust_boilerplate_backend  participate_in_lottery_draw '(0, 0)'
-```
-This function retrieves a list of all purchased lottery tickets.
-```rust
-#[ic_cdk::query]
-fn get_all_lottery_tickets() -> Result<Vec<LotteryTicket>, LotteryError>
-```
-Example : 
-```rust
-dfx canister call icp_rust_boilerplate_backend get_all_lottery_tickets '()'
+dfx canister call icp_rust_boilerplate_backend get_all_lottery_tickets
 ```
 This function retrieves a list of all conducted lottery draws.
-```rust
-#[ic_cdk::query]
-fn get_all_lottery_draws() -> Result<Vec<LotteryDraw>, LotteryError>
-```
+
 Example :
 ```rust
 dfx canister call icp_rust_boilerplate_backend get_all_lottery_draws '()'
