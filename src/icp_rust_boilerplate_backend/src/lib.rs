@@ -98,7 +98,7 @@ thread_local! {
 fn buy_lottery_ticket(numbers: Vec<u32>, draw_id: u64) -> Result<LotteryTicket, LotteryError> {
     // Validate the numbers
     if numbers.len() != 6 || numbers.iter().any(|&num| num > 49 || num == 0) {
-        return Err(LotteryError::InvalidNumbers { msg: "Invalid lottery numbers".to_string() });
+        return Err(LotteryError::InvalidNumbers { msg: "Invalid lottery numbers, there should be 6 numbers between 1 and 49".to_string() });
     }
 
     let mut draw = LOTTERY_DRAW_STORAGE.with(|service| {
