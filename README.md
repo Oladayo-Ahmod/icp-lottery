@@ -67,3 +67,6 @@ dfx deploy
 ```
 
 Once the job completes, your application will be available at `http://localhost:4943?canisterId={asset_canister_id}`.
+![deployed-canister](https://github.com/user-attachments/assets/a95ccc08-fef6-43f9-a889-f9797b2fb2b0)
+
+
